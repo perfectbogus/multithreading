@@ -15,6 +15,9 @@ public class SharedResourcesExample {
         incrementThread.join();
         decrementThread.join();
 
+        //Notes: We have unexpected behavior because the critical section is
+        // under the control of the OS Scheduler and the increment and decrement
+        // is made in three steps (is not atomic operation)  that are interrupted between the threads
         System.out.println("No Sync Solution: " + inventoryCounter.getItem());
 
         // Sync Method Level Section
