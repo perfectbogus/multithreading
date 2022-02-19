@@ -1,4 +1,4 @@
-package com.perfectbogus.dev;
+package dev.perfectbogus;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.perfectbogus.dev;
+package dev.perfectbogus;
 
 public class InnerStackMemoryExample {
 

@@ -1,4 +1,4 @@
-package com.perfectbogus.dev;
+package dev.perfectbogus;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;

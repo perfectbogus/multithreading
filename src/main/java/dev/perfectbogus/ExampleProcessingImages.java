@@ -1,4 +1,4 @@
-package com.perfectbogus.dev;
+package dev.perfectbogus;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
