@@ -49,7 +49,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <p>
  * See README.md for instruction on how to run the application
  */
-public class Main extends Application {
+public class MainLagyApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -82,26 +82,31 @@ public class Main extends Application {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (pricesContainer.getLockObject().tryLock()) {
-                    try {
-                        Label bitcoinLabel = cryptoLabels.get("BTC");
-                        bitcoinLabel.setText(String.valueOf(pricesContainer.getBitcoinPrice()));
+                /*
+                 * If you run the app you'll see that the app is getting to much time to
+                 * response and change the background and update the price of the label
+                 */
+                pricesContainer.getLockObject().unlock();
 
-                        Label etherLabel = cryptoLabels.get("ETH");
-                        etherLabel.setText(String.valueOf(pricesContainer.getEtherPrice()));
+                try {
+                    Label bitcoinLabel = cryptoLabels.get("BTC");
+                    bitcoinLabel.setText(String.valueOf(pricesContainer.getBitcoinPrice()));
 
-                        Label litecoinLabel = cryptoLabels.get("LTC");
-                        litecoinLabel.setText(String.valueOf(pricesContainer.getLitecoinPrice()));
+                    Label etherLabel = cryptoLabels.get("ETH");
+                    etherLabel.setText(String.valueOf(pricesContainer.getEtherPrice()));
 
-                        Label bitcoinCashLabel = cryptoLabels.get("BCH");
-                        bitcoinCashLabel.setText(String.valueOf(pricesContainer.getBitcoinCashPrice()));
+                    Label litecoinLabel = cryptoLabels.get("LTC");
+                    litecoinLabel.setText(String.valueOf(pricesContainer.getLitecoinPrice()));
 
-                        Label rippleLabel = cryptoLabels.get("XRP");
-                        rippleLabel.setText(String.valueOf(pricesContainer.getRipplePrice()));
-                    } finally {
-                        pricesContainer.getLockObject().unlock();
-                    }
+                    Label bitcoinCashLabel = cryptoLabels.get("BCH");
+                    bitcoinCashLabel.setText(String.valueOf(pricesContainer.getBitcoinCashPrice()));
+
+                    Label rippleLabel = cryptoLabels.get("XRP");
+                    rippleLabel.setText(String.valueOf(pricesContainer.getRipplePrice()));
+                } finally {
+                    pricesContainer.getLockObject().unlock();
                 }
+
             }
         };
 
@@ -253,7 +258,6 @@ public class Main extends Application {
         public void run() {
             while (true) {
                 pricesContainer.getLockObject().lock();
-
                 try {
                     try {
                         Thread.sleep(1000);
